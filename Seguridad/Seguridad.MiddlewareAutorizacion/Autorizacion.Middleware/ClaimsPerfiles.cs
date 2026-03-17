@@ -28,7 +28,7 @@ namespace Autorizacion.Middleware
 
         public async Task InvokeAsync(HttpContext httpContext, IAutorizacionFlujo autorizacionFlujo)
         { 
-        _autorizacionFlujo = autorizacionFlujo;
+            _autorizacionFlujo = autorizacionFlujo;
             ClaimsIdentity appIdentity = await verificarAutorizacion(httpContext);
             httpContext.User.AddIdentity(appIdentity);
             await _next(httpContext);
@@ -55,9 +55,16 @@ namespace Autorizacion.Middleware
             }
         }
 
-        private async Task<IEnumerable<RolResponse>> obtenerInformacionRoles(HttpContext httpContext)
+        private async Task<IEnumerable<RolBase>> obtenerInformacionRoles(HttpContext httpContext)
         {
-            return await _autorizacionFlujo.ObtenerRolxUsuario(new Usuario { Nombre = httpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value });
+            var nombre = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            var correo = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+            return await _autorizacionFlujo.ObtenerRolxUsuario(
+                new Usuario {
+                    Nombre = nombre,
+                    Correo = correo
+                });
         }
 
     }

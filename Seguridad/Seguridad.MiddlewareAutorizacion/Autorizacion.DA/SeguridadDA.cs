@@ -17,10 +17,10 @@ namespace Autorizacion.DA
             _sqlConnection = repositorioDapper.ObtenerRepositorioDapper();
         }
 
-        public async Task<IEnumerable<RolResponse>> ObtenerRolxUsuario(Usuario usuario)
+        public async Task<IEnumerable<RolBase>> ObtenerRolxUsuario(Usuario usuario)
         {
             string sql = @"ObtenerRolxUsuario";
-            var resultado = await _sqlConnection.QueryAsync<RolResponse>(sql,
+            var resultado = await _sqlConnection.QueryAsync<RolBase>(sql,
             new
             {
                 Correo = usuario.Correo,
