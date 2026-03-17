@@ -13,7 +13,7 @@ namespace Abstracciones.Modelos
         public Guid idUsuario { get; set; }
         public string Correo { get; set; } = string.Empty;
         public string Nombre { get; set; }
-        public string Direccion { get; set; }
+        public string Direccion { get; set; } 
         public string? MetodoPago { get; set; }
 
     }
