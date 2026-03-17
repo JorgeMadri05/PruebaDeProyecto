@@ -10,7 +10,7 @@ namespace Autorizacion.DA
     {
         IRepositorioDapper _repositorioDapper;
         private SqlConnection _sqlConnection;
-         
+          
         public SeguridadDA(IRepositorioDapper repositorioDapper)
         {
             _repositorioDapper = repositorioDapper;
