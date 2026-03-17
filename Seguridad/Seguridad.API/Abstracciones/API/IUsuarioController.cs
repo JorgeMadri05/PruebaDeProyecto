@@ -7,5 +7,6 @@ namespace Abstracciones.API
     {
         Task<IActionResult> PostAsync([FromBody] ClienteCompleto clienteCompleto);
         Task<IActionResult> ObtenerUsuario([FromBody] Cliente cliente);
+        Task<IActionResult> ObtenerUsuario([FromBody] Cliente cliente);
     }
 }

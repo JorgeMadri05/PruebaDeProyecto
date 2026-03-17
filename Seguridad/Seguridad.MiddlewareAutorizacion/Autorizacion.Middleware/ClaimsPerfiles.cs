@@ -39,18 +39,18 @@ namespace Autorizacion.Middleware
            var claims=new List<Claim>();
             if (httpContext.User != null && httpContext.User.Identity.IsAuthenticated)
             {                
-                await ObtenerPerfiles(httpContext, claims);
+                await ObtenerRol(httpContext, claims);
             }
             var appIdentity=new ClaimsIdentity(claims);
             return appIdentity;
         }
 
-        private async Task ObtenerPerfiles(HttpContext httpContext, List<Claim> claims)
+        private async Task ObtenerRol (HttpContext httpContext, List<Claim> claims)
         {
             var roles = await obtenerInformacionRoles(httpContext);
             if (roles != null && roles.Any()) { 
             foreach (var rol in roles) {
-                    claims.Add(new Claim(ClaimTypes.Role, rol.Rol.ToString()));
+                claims.Add(new Claim(ClaimTypes.Role, rol.Rol));
                 }
             }
         }
